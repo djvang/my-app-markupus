@@ -27,12 +27,13 @@ class Pagination extends Component {
         let prev = 1 === this.state.page ? this.state.page : this.state.page - 1;
         let next = pages.length === this.state.page ? this.state.page : this.state.page + 1;
 
-        console.log(prev, this.state.page, next);
+        // console.log(prev, this.state.page, next);
    
         return (
             <ul className="uk-pagination uk-flex-center">
                 <li><a href="/" data-page={prev} onClick={this.handlePagination}><span><svg width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg" ratio="1"><polyline fill="none" stroke="#000" strokeWidth="1.2" points="6 1 1 6 6 11"></polyline></svg></span></a></li>
                 {pages.map(page => {
+                  // console.log(Math.abs(this.state.page - page));
                   if(Math.abs(this.state.page - page) > this.state.view / 2) {
                     return <li key={page} className='uk-hidden'><a href="/" data-page={page} onClick={this.handlePagination}>{page}</a></li>
                   } else {
