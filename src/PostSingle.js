@@ -8,6 +8,9 @@ class PostSingle extends Component {
             id: this.props.match.params.id,
             data: {}
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -18,6 +21,32 @@ class PostSingle extends Component {
                 data
             })
         })
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+    
+        this.setState({
+            [name]: value
+        });
+    }
+
+    onSubmit(event) {
+        event.preventDefault();
+        
+        const data = Object.assign({}, this.state.data);
+
+        data.comments.push({
+            id: new Date().getTime(),
+            name: this.state.name,
+            email: this.state.email,
+            body: this.state.comment
+        });
+
+        this.setState({
+            data
+        });
     }
 
     render() {
@@ -65,17 +94,17 @@ class PostSingle extends Component {
                 
                 </div>
                 <hr/>
-                <form action="#" className="uk-comment-form uk-margin-medium-top">
+                <form action="#" onSubmit={this.onSubmit} className="uk-comment-form uk-margin-medium-top">
                     <fieldset className="uk-fieldset">
                         <legend className="uk-legend">Add Comment</legend>
                         <div className="uk-margin">
-                            <textarea className="uk-textarea" rows="5" placeholder="Comment" required></textarea>
+                            <textarea onChange={this.handleChange} name="comment" className="uk-textarea" rows="5" placeholder="Comment" required></textarea>
                         </div>
                         <div className="uk-margin">
-                            <input className="uk-input" type="text" placeholder="Name" required/>
+                            <input onChange={this.handleChange} name="name" className="uk-input" type="text" placeholder="Name" required/>
                         </div>
                         <div className="uk-margin">
-                            <input className="uk-input" type="email" placeholder="Email" required/>
+                            <input onChange={this.handleChange}  name="email" className="uk-input" type="email" placeholder="Email" required/>
                         </div>
                         <div className="uk-margin">
                             <button className="uk-button uk-button-primary" type="submit">Post Comment</button>
