@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
-import PostsList from './PostsList';
-import Pagination from './Pagination';
+import PostsOverview from './PostsOverview';
+import PostSingle from './PostSingle';
 import './App.css';
 
+import { Route } from "react-router-dom";
+
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      page: 1,
-    }
-
-    this.setPage = this.setPage.bind(this);
-  }
-
-  setPage(page) {
-    this.setState({
-      page
-    });
-  }
-
   render() {
     
     return (
@@ -31,12 +18,24 @@ class App extends Component {
           <div className="uk-section">
             <div className="uk-container">
 
-              <PostsList page={this.state.page}/>  
-              <Pagination page={this.state.page} pager={this.setPage}/>
+
+              {/* <Route exact path="/" render={() => {
+                return (
+                  <div>
+                    <PostsList page={this.state.page}/>  
+                    <Pagination page={this.state.page} pager={this.setPage}/>
+                  </div>
+                )
+              }} /> */}
+
+              <Route exact path="/" component={PostsOverview}/>
+              <Route path="/:id" component={PostSingle} />
 
             </div>
         </div>
         </main>
+
+       
       </div>
     );
   }

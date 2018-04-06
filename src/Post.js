@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 class Post extends Component {
   render() {
     const post = this.props.post;
@@ -12,7 +14,7 @@ class Post extends Component {
               <p>{post.body}</p>
           </div>
           <div className="uk-card-footer">
-              <a href="/" className="uk-button uk-button-text">Read more</a>
+              <Link to={`/${post.id}`} className="uk-button uk-button-text">Read more</Link>
           </div>
       </div>
     );
