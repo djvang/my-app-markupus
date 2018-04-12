@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import PostsOverview from './PostsOverview';
 import PostSingle from './PostSingle';
+import PhotosOverview from './PhotosOverview';
 import './App.css';
 
 import { Route } from "react-router-dom";
@@ -30,6 +31,8 @@ class App extends Component {
 
               <Route exact path="/" component={PostsOverview}/>
               <Route path="/:id" component={PostSingle} />
+
+              <Route path="/photos" component={PhotosOverview} />
 
             </div>
         </div>
